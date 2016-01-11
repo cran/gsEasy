@@ -1,0 +1,59 @@
+---
+title: "gsEasy"
+author: "Daniel Greene"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{gsEasy}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+```{r echo=FALSE}
+suppressPackageStartupMessages(library(gsEasy))
+set.seed(1)
+```
+## Calculate *p*-values for enrichment of set
+
+`gsEasy` has a function `gset` for calculating *p*-values of enrichment for sets (of genes) in ranked/scored lists (of genes) by permutation (see 'Gene Set Enrichment Analysis' described by Subramanian et al, 2005). `gset`, which requires arguments `N`, the total number of genes and `S`, the ranks of the genes in the test set amongst the N. An optional vector `r` of length `N` with scores, e.g. gene expression correlation, in order of rank can be passed. If unspecified, it defaults to `1-(i-1)/N` for the `i`th gene. Finally, a numeric value `p`, used to weight the enrichment scores given by `r` can be passed (for more details, see Subramanian et al, 2005). The default value is 1.
+
+```{r}
+#highly enriched... the set of ranks are relatively high out of 1000
+gset(S=1:5 * 2, N=1000)
+
+#random sets...
+replicate(n=10, expr=gset(S=sample.int(n=1000, size=5), N=1000))
+```
+
+Alternatively, you can pass the names of genes as `S` with a sorted list of gene names as `r` (in which case the scores default to the ranks in the list), or a numeric vector of scores named by genes as `r`.
+```{r}
+gset(S=c("gene 1", "gene 5", "gene 40"), r=paste("gene", 1:100))
+```
+
+Multiple gene sets can thus be tested for enrichment with a single call to a high level function such as `sapply` (or, if you have many sets to test and multiple cores available, `mclapply`), for instance:
+```{r}
+gene_sets <- c(list(1:5), replicate(n=10, simplify=FALSE, expr=sample.int(n=1000, size=5)))
+names(gene_sets) <- c("enriched set", paste("unenriched set", 1:10))
+gene_sets
+sapply(gene_sets, function(set) gset(S=set, N=1000))
+```
+
+## Ontological annotations
+
+`gsEasy` has a function `get_ontological_gene_sets` for creating lists of gene sets defined by annotation with ontological terms, such that ontological *is-a* relations are propagated. `get_ontological_gene_sets` accepts an `ontological_index` argument and two character vectors, corresponding to genes and terms respectively, whereby the n-th element in each vector corresponds to one annotation pair. The result, a list of character vectors of gene names, can then be used as an argument of `gset`.
+
+```{r}
+library(ontologyIndex)
+data(hpo)
+df <- data.frame(
+	gene=c("gene 1", "gene 2"), 
+	term=c("HP:0000598", "HP:0000118"), 
+	name=hpo$name[c("HP:0000598", "HP:0000118")], 
+	stringsAsFactors=FALSE,
+	row.names=NULL)
+df
+get_ontological_gene_sets(hpo, gene=df$gene, term=df$term)
+```
+
+## GO
+`get_GO_gene_sets` is a specialisation of `get_ontological_gene_sets` for the Gene Ontology (GO) which can be called passing just a file path to the annotation file (official version available at http://geneontology.org/gene-associations/gene_association.goa_human.gz). 
