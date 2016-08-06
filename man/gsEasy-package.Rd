@@ -25,12 +25,8 @@ Daniel Greene <dg333@cam.ac.uk>
 Maintainer: Daniel Greene <dg333@cam.ac.uk>
 }
 \references{
-Subramanian, A, Tamayo, P, Mootha, VK, Mukherjee, S, Ebert, BL, Gillette, MA, Paulovich, A, Pomeroy, SL, Golub, TR, Lander, ES, Mesirov, JP (2005). Gene set enrichment analysis: a knowledge-based approach for interpreting genome-wide expression profiles. Proc. Natl. Acad. Sci. U.S.A., 102, 43:15545-50.
+Subramanian, A, Tamayo, P, Mootha, VK, Mukherjee, S, Ebert, BL, Gillette, MA, Paulovich, A, Pomeroy, SL, Golub, TR, Lander, ES, Mesirov, JP (2005). Gene set enrichment analysis: a knowledge-based approach for interpreting genome-wide expression profiles. Proc. Natl. Acad. Sci. U.S.A., 102, 43:15545-50, doi: 10.1073/pnas.0506580102.
+
+Ashburner et al. Gene ontology: tool for the unification of biology (2000) Nat Genet 25(1):25-9
 }
-%\seealso{
-%~~ Optional links to other man pages, e.g. ~~
-%~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
-%}
-%\examples{
-%%% ~~ simple examples of the most important functions ~~
-%}
+

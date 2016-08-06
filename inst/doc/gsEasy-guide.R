@@ -3,10 +3,9 @@ suppressPackageStartupMessages(library(gsEasy))
 set.seed(1)
 
 ## ------------------------------------------------------------------------
-#highly enriched... the set of ranks are relatively high out of 1000
-gset(S=1:5 * 2, N=1000)
+gset(S=1:5, N=1000)
 
-#random sets...
+## ------------------------------------------------------------------------
 replicate(n=10, expr=gset(S=sample.int(n=1000, size=5), N=1000))
 
 ## ------------------------------------------------------------------------
@@ -29,4 +28,8 @@ df <- data.frame(
 	row.names=NULL)
 df
 get_ontological_gene_sets(hpo, gene=df$gene, term=df$term)
+
+## ------------------------------------------------------------------------
+data(GO_gene_sets)
+GO_gene_sets[1:6]
 

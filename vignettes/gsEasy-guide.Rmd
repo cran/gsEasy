@@ -15,13 +15,20 @@ set.seed(1)
 ```
 ## Calculate *p*-values for enrichment of set
 
-`gsEasy` has a function `gset` for calculating *p*-values of enrichment for sets (of genes) in ranked/scored lists (of genes) by permutation (see 'Gene Set Enrichment Analysis' described by Subramanian et al, 2005). `gset`, which requires arguments `N`, the total number of genes and `S`, the ranks of the genes in the test set amongst the N. An optional vector `r` of length `N` with scores, e.g. gene expression correlation, in order of rank can be passed. If unspecified, it defaults to `1-(i-1)/N` for the `i`th gene. Finally, a numeric value `p`, used to weight the enrichment scores given by `r` can be passed (for more details, see Subramanian et al, 2005). The default value is 1.
+`gsEasy` has a function `gset` for calculating *p*-values of enrichment for sets (of genes) in ranked/scored lists (of genes) by permutation (see 'Gene Set Enrichment Analysis' described by Subramanian et al, 2005). The arguments of `gset` are named as in the paper:
 
+* `N`: the total number of genes,
+* `S`: `integer` vector giving the ranks of the genes in the test set amongst the `N`, *or* giving the indices within the scores vector `r` (see below) *or* a `character` vector of the names of genes in the test set, 
+* `r`: (optional) vector of length `N` of correlation scores, e.g. gene expression correlation. If unspecified, it defaults to `1-(i-1)/N` for the `i`th gene. If `S` is given as the names of genes, `r` must either be a `character` vector of genes in rank order or named by `genes` (necessarily containing all the genes in `S`).
+* `p`: a numeric value used to exponentiate the enrichment scores given by `r`, with higher values having the effect of increasing the weight on the highest scores/ranks (for more details, see Subramanian et al, 2005). The default value is `1` [i.e. not transformed].
+
+Say we had a set of 5 genes which appeared at the top five ranks out of 1000 (i.e. highly enriched at the high ranks!). We could calculate an enrichment *p*-value simply as:
 ```{r}
-#highly enriched... the set of ranks are relatively high out of 1000
-gset(S=1:5 * 2, N=1000)
+gset(S=1:5, N=1000)
+```
 
-#random sets...
+So the *p*-value is close to zero. However for random sets, the *p*-values are distributed uniformly:
+```{r}
 replicate(n=10, expr=gset(S=sample.int(n=1000, size=5), N=1000))
 ```
 
@@ -55,5 +62,11 @@ df
 get_ontological_gene_sets(hpo, gene=df$gene, term=df$term)
 ```
 
-## GO
-`get_GO_gene_sets` is a specialisation of `get_ontological_gene_sets` for the Gene Ontology (GO) which can be called passing just a file path to the annotation file (official version available at http://geneontology.org/gene-associations/gene_association.goa_human.gz). 
+## Gene Ontology (GO) annotations
+`gsEasy` comes with a `list` of GO annotations, `GO_gene_sets` [based on annotations downloaded from geneontology.org on 07/08/2016], which can be loaded with `data`. This comprises a `list` of all gene sets (i.e. `character` vectors of gene names) associated with each GO term, for GO terms being annotated with at most 500 genes.
+```{r}
+data(GO_gene_sets)
+GO_gene_sets[1:6]
+```
+
+It also has a function `get_GO_gene_sets` which is a specialisation of `get_ontological_gene_sets` for the Gene Ontology (GO) which can be called passing just a file path to the annotation file (official version available at http://geneontology.org/), should an up-to-date version be required. 

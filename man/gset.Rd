@@ -5,14 +5,14 @@
 \title{Gene set enrichment test}
 \usage{
 gset(S, N = NULL, r = NULL, p = 1, min_its = 200, max_its = 1e+05,
-  significance_threshold = 0.05, log_dismiss = -10)
+  significance_threshold = 0.05, log_dismiss = -10, raw_score = FALSE)
 }
 \arguments{
 \item{S}{Ranks of gene set}
 
 \item{N}{Integer value. Only required if \code{r} is not specified.}
 
-\item{r}{Rank/correlation scores. If \code{S} is \code{character}, then \code{r} must be named by gene or be a character vector itself of the gene names (necessarily containing \code{S}) in rank order.}
+\item{r}{Rank/correlation scores. If \code{S} is \code{character}, then \code{r} must be named by gene or be a character vector of the gene names in rank order (necessarily containing \code{S}).}
 
 \item{p}{Weighting of ranking/correlations, see Subramanian et. al 2005.}
 
@@ -23,6 +23,8 @@ gset(S, N = NULL, r = NULL, p = 1, min_its = 200, max_its = 1e+05,
 \item{significance_threshold}{Maximum p-value of significant result.}
 
 \item{log_dismiss}{Threshold log probability of returning a significant result, below which function returns current p-value.}
+
+\item{raw_score}{Logical value determining whether to return the raw value of the gene set enrichment score.}
 }
 \value{
 Numeric value - p-value of enrichment.
