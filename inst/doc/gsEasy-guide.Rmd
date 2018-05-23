@@ -22,7 +22,7 @@ set.seed(1)
 * `r`: (optional) vector of length `N` of correlation scores, e.g. gene expression correlation. If unspecified, it defaults to `1-(i-1)/N` for the `i`th gene. If `S` is given as the names of genes, `r` must either be a `character` vector of genes in rank order or named by `genes` (necessarily containing all the genes in `S`).
 * `p`: a numeric value used to exponentiate the enrichment scores given by `r`, with higher values having the effect of increasing the weight on the highest scores/ranks (for more details, see Subramanian et al, 2005). The default value is `1` [i.e. not transformed].
 
-Say we had a set of 5 genes which appeared at the top five ranks out of 1000 (i.e. highly enriched at the high ranks!). We could calculate an enrichment *p*-value simply as:
+Say we had a set of 5 genes which appeared at the top five ranks out of 1000 (i.e. highly enriched at the high ranks!). We could then calculate an enrichment *p*-value using the command:
 ```{r}
 gset(S=1:5, N=1000)
 ```
@@ -47,7 +47,7 @@ sapply(gene_sets, function(set) gset(S=set, N=1000))
 
 ## Ontological annotations
 
-`gsEasy` has a function `get_ontological_gene_sets` for creating lists of gene sets defined by annotation with ontological terms, such that ontological *is-a* relations are propagated. `get_ontological_gene_sets` accepts an `ontological_index` argument and two character vectors, corresponding to genes and terms respectively, whereby the n-th element in each vector corresponds to one annotation pair. The result, a list of character vectors of gene names, can then be used as an argument of `gset`.
+`gsEasy` has a function `get_ontological_gene_sets` for creating lists of gene sets corresponding to annotation with ontological terms such that ontological *is-a* relations are propagated. `get_ontological_gene_sets` accepts an `ontological_index` (see the R package `ontologyIndex` for more details) argument and two character vectors, corresponding to genes and terms respectively, whereby the n-th element in each vector corresponds to one annotation pair. The result, a list of character vectors of gene names, can then be used as an argument of `gset`.
 
 ```{r}
 library(ontologyIndex)
@@ -69,4 +69,4 @@ data(GO_gene_sets)
 GO_gene_sets[1:6]
 ```
 
-It also has a function `get_GO_gene_sets` which is a specialisation of `get_ontological_gene_sets` for the Gene Ontology (GO) which can be called passing just a file path to the annotation file (official version available at http://geneontology.org/), should an up-to-date version be required. 
+It also has a function `get_GO_gene_sets` which is a specialisation of `get_ontological_gene_sets` for the Gene Ontology (GO) which can be called passing just a file path to the annotation file (official up-to-date version available at http://geneontology.org/).

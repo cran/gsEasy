@@ -1,8 +1,8 @@
 #include <Rcpp.h>
 #include <cmath>
 
-#ifndef INCLUDED_RCPP_EXPORTS_H
-#define INCLUDED_RCPP_EXPORTS_H
+#ifndef INCLUDED_INTERFACE_H
+#define INCLUDED_INTERFACE_H
 
 using namespace Rcpp;
 using namespace std;
