@@ -4,8 +4,7 @@
 \alias{get_ontological_gene_sets}
 \title{Create list of gene sets defined by ontological annotation}
 \usage{
-get_ontological_gene_sets(ontology, gene, term, min_genes = 1,
-  max_genes = 500)
+get_ontological_gene_sets(ontology, gene, term, min_genes = 1, max_genes = 500)
 }
 \arguments{
 \item{ontology}{\code{ontology_index} object.}

@@ -4,7 +4,9 @@
 \name{GO_gene_sets}
 \alias{GO_gene_sets}
 \title{GO term gene sets}
-\format{List of character vectors of genes per GO term, and named by term ID.}
+\format{
+List of character vectors of genes per GO term, and named by term ID.
+}
 \description{
 List of gene sets annotated by each GO term
 }

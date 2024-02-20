@@ -69,4 +69,4 @@ data(GO_gene_sets)
 GO_gene_sets[1:6]
 ```
 
-It also has a function `get_GO_gene_sets` which is a specialisation of `get_ontological_gene_sets` for the Gene Ontology (GO) which can be called passing just a file path to the annotation file (official up-to-date version available at http://geneontology.org/).
+It also has a function `get_GO_gene_sets` which is a specialisation of `get_ontological_gene_sets` for the Gene Ontology (GO) which can be called passing just a file path to the annotation file (official up-to-date version available at https://geneontology.org/).

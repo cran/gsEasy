@@ -8,17 +8,6 @@ Gene Set Enrichment Analysis in R
 \description{
 R-interface to C++ implementation of the rank/score based GSEA test described by Subramanian et al 2005.
 }
-\details{
-\tabular{ll}{
-Package: \tab gsEasy\cr
-Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2016-01-11\cr
-License: \tab GPL >= 2\cr
-}
-%~~ An overview of how to use the package, including the most important ~~
-%~~ functions ~~
-}
 \author{
 Daniel Greene <dg333@cam.ac.uk>
 

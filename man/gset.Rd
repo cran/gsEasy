@@ -4,8 +4,17 @@
 \alias{gset}
 \title{Gene set enrichment test}
 \usage{
-gset(S, N = NULL, r = NULL, p = 1, min_its = 200, max_its = 1e+05,
-  significance_threshold = 0.05, log_dismiss = -10, raw_score = FALSE)
+gset(
+  S,
+  N = NULL,
+  r = NULL,
+  p = 1,
+  min_its = 200,
+  max_its = 1e+05,
+  significance_threshold = 0.05,
+  log_dismiss = -10,
+  raw_score = FALSE
+)
 }
 \arguments{
 \item{S}{Ranks of gene set}
